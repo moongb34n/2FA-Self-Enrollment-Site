@@ -9,20 +9,20 @@ Self enrollment website for Google Authentication 2FA system with F5 BIG-IP VPN
 
 ## Back-end Scripts
 ### **generateKey.py** 
->Called by the web front-end after a user successfully logs in and hits Submit
+Called by the web front-end after a user successfully logs in and hits Submit
 ```
 # python26 generateKey.py
 A4VASU5475L2IQE2
 ```
 ### **VPNenrollment-new.exp**
->Creates an SSH session to VPN appliance to add user key pairing
+Creates an SSH session to VPN appliance to add user key pairing
 
 ### **VPNenrollment-update.exp**
->Creates an SSH session to VPN appliance to update existing user key pairing
+Creates an SSH session to VPN appliance to update existing user key pairing
 
 ## Logging & Troubleshooting
 ### **OTPcheck.py [argv1]**
->Checks system generated OTP, useful for comparing user device generated OTP
+Checks system generated OTP, useful for comparing user device generated OTP
 ```
 # python26 OTPcheck.py A4VASU5475L2IQE2
 ('Current OTP:', u'403545')
