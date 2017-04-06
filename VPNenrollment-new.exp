@@ -1,0 +1,56 @@
+#!/usr/bin/expect
+#
+# Expect script for creating user key pairing in F5 BIG-IP VPN appliance
+#
+# Written by: jreyes@prysm.com
+# v1.0 2017-04
+#
+# 4/6/2017 - latest version
+#
+
+exp_internal 0
+set timeout 6
+set user [lindex $argv 0]
+set key [lindex $argv 1]
+set chan [open /var/www/html/vpn/logfile.txt a]
+set time [timestamp -format %c]
+
+spawn ssh 10.1.100.12 -l vpnadmin
+
+expect {
+	"yes/no" {
+		send "yes\n"
+		sleep 2
+		expect "Password:"
+		send "vpnadmin\n"
+		sleep 1		
+	}
+	"Password:" {
+		send "vpnadmin\n"
+		sleep 1
+	}
+}
+expect "(tmos)#"
+puts $chan $time
+puts $chan "Connection opened to VPN appliance"
+
+send "modify /ltm data-group internal google_auth_keys records add { $user { data $key } }\n"
+puts $chan "Executing command: modify /ltm data-group internal google_auth_keys records add { $user { data $key } }"
+sleep 1
+expect {
+	"already exists in partition" {
+		send "quit\n"
+		expect "closed"
+		close
+		send_user "User already exists\n"
+		puts $chan "User already exists"
+	}
+	"(tmos)#" {
+		send "quit\n"
+		expect "closed"
+		close
+		puts $chan "User successfully added"
+	}
+}
+puts $chan "Connection closed\n"
+close $chan
