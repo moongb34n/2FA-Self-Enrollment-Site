@@ -1,6 +1,6 @@
 #!/usr/bin/expect
 #
-# Expect script for updating user key in F5 BIG-IP VPN appliance
+# Expect script for updating user key pairing in F5 BIG-IP VPN appliance
 #
 # Written by: jreyes@prysm.com
 # v1.0 2017-04
