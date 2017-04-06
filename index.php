@@ -27,7 +27,7 @@ $username = ($user . $domain);
 $time = date('F j Y, g:i a');
 
 if ($_POST['submit']) {
-	$ldap = ldap_connect("10.1.0.75");
+	$ldap = ldap_connect("x.x.x.x");
 	if ($bind = ldap_bind($ldap, $username, $password)) {
 		$_SESSION['valid'] = 1;
 	} else {
