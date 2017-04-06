@@ -22,11 +22,11 @@ expect {
 		send "yes\n"
 		sleep 2
 		expect "Password:"
-		send "vpnadmin\n"
+		send "****\n"
 		sleep 1		
 	}
 	"Password:" {
-		send "vpnadmin\n"
+		send "****\n"
 		sleep 1
 	}
 }
