@@ -4,8 +4,9 @@ Web front-end for 2FA self-enrollment.
 Written by: jreyes@prysm.com
 v1.0 2017-04
 
-4/6/2017 - latest version
+4/7/2017 - latest version
 -->
+<!DOCTYPE html>
 <html>
 <body>
 
