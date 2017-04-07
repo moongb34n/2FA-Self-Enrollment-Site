@@ -53,9 +53,9 @@ function newEnrollment($key, $user, $username, $time, $type) {
 			</body></html>
 		";
 		echo $messageNew;
-	}
 		
-	mail($username, $subjectNew, $messageNew, $headers);	
+		mail($username, $subjectNew, $messageNew, $headers);
+	}	
 }
 
 function updateEnrollment($key, $user, $username, $time, $type) {
