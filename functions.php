@@ -3,7 +3,7 @@
 Written by: jreyes@prysm.com
 v1.0 2017-04
 
-4/6/2017 - latest version
+4/7/2017 - latest version
 */
 
 function newEnrollment($key, $user, $username, $time, $type) {
@@ -27,10 +27,7 @@ function newEnrollment($key, $user, $username, $time, $type) {
 			<p>Please use <b>Update</b> enrollment type to overwrite your existing account or contact IT support.</p>
 			</body></html>
 		";
-		echo "
-			<h4>User: $username already exists in the system</h4>
-			<p>Please use <b>Update</b> enrollment type to overwrite your existing account or contact IT support.</p>
-		";
+		echo $messageNew;
 	} else {
 		$subjectNew = 'You have been successfully enrolled';
 		$messageNew = "
@@ -55,28 +52,7 @@ function newEnrollment($key, $user, $username, $time, $type) {
 			</div>
 			</body></html>
 		";
-		echo "
-			<div>
-			<h3>Enrollment successful for: <span style='color:blue;'>$username</span></h3>
-			<h4>Enable Google Authenticator on your mobile device:</h4>
-			<ol>
-				<li>Install <b>Google Authenticator</b> from Play Store (Android) or App Store (Apple)</li>
-				<li>Open the Google Authenticator app</li>
-				<li>Click <b>Begin</b>, create your account by doing one of the following:</li>
-					<ul>
-						<li>Scanning the QR code on this page</li>
-						<li>Manual key entry using the generated <b>Secret Key</b> below</li>
-					</ul>
-			</ol>
-		
-			<div style=margin-left:50px>
-			<img src=https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/$username%3Fsecret%3D$key>
-			<br><br>
-			<p><b>Account: </b>$username</p>
-			<p><b>Secret Key: </b>$key</p>
-			</div>
-			</div>
-		";
+		echo $messageNew;
 	}
 		
 	mail($username, $subjectNew, $messageNew, $headers);	
@@ -117,30 +93,8 @@ function updateEnrollment($key, $user, $username, $time, $type) {
 		</div>
 		</div>
 		</body></html>
-	";
-		
-	echo "
-		<div>
-		<h3>Update successful for: <span style='color:blue;'>$username</span></h3>
-		<h4>Update your Google Authenticator account on your mobile device:</h4>
-		<ol>
-			<li>Open the Google Authenticator app</li>
-			<li>Remove the old account</li>
-			<li>Click <b>+</b> button to re-create your account, using one of the following methods:</li>
-				<ul>
-					<li>Scanning the QR code on this page</li>
-					<li>Manual key entry using your account and the generated <b>Secret Key</b> below</li>
-				</ul>
-		</ol>
-		
-		<div style=margin-left:50px>
-		<img src=https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/$username%3Fsecret%3D$key>
-		<br><br>
-		<p><b>Account: </b>$username</p>
-		<p><b>Secret Key: </b>$key</p>
-		</div>
-		</div>
-	";
+	";		
+	echo $messageUpdate;
 		
 	mail($username, $subjectUpdate, $messageUpdate, $headers);
 }
