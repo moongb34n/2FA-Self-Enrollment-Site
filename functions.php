@@ -3,7 +3,7 @@
 Written by: jreyes@prysm.com
 v1.0 2017-04
 
-4/7/2017 - latest version
+4/14/2017 - latest version
 */
 
 function newEnrollment($key, $user, $username, $time, $type) {
@@ -34,7 +34,11 @@ function newEnrollment($key, $user, $username, $time, $type) {
 			<html><body>
 			<h4>Enable Google Authenticator on your mobile device:</h4>
 			<ol>
-				<li>Install <b>Google Authenticator</b> from Play Store (Android) or App Store (Apple)</li>
+				<li>Download and install <b>Google Authenticator</b> from Play Store (Android) or App Store (Apple), instructions below:</li>
+					<ul>
+						<li><a href='http://pen.prysm.corp/vpn/files/Google_Authenticator_Android.pdf' target='_blank'>Android</a></li>
+						<li><a href='http://pen.prysm.corp/vpn/files/Google_Authenticator_iPhone.pdf' target='_blank'>iPhone</a></li>						
+					</ul>
 				<li>Open the Google Authenticator app</li>
 				<li>Click <b>Begin</b>, create your account using one of the following methods:</li>
 					<ul>
@@ -55,7 +59,7 @@ function newEnrollment($key, $user, $username, $time, $type) {
 		echo $messageNew;
 		
 		mail($username, $subjectNew, $messageNew, $headers);
-	}	
+	}
 }
 
 function updateEnrollment($key, $user, $username, $time, $type) {
