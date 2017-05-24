@@ -8,9 +8,9 @@ v1.1 2017-05
 
 function newEnrollment($key, $user, $username, $time, $type) {
 	// Open enrollment log file
-	$enrolledList = fopen("/var/www/html/vpn/preprod/enrollment-list.txt", "a");
+	$enrolledList = fopen("/var/www/html/vpn/enrollment-list.txt", "a");
 
-	$cmdResult = exec("expect /var/www/html/vpn/preprod/pp-VPNenrollment-new.exp $user $key", $result);
+	$cmdResult = exec("expect /var/www/html/vpn/VPNenrollment-new.exp $user $key", $result);
 	
 	// Set mail variables
 	$headers  = 'MIME-Version: 1.0' . "\r\n";
@@ -64,9 +64,9 @@ function newEnrollment($key, $user, $username, $time, $type) {
 
 function updateEnrollment($key, $user, $username, $time, $type) {
 	// Open enrollment log file
-	$enrolledList = fopen("/var/www/html/vpn/preprod/enrollment-list.txt", "a");
+	$enrolledList = fopen("/var/www/html/vpn/enrollment-list.txt", "a");
 	
-	$cmdResult = exec("expect /var/www/html/vpn/preprod/pp-VPNenrollment-update.exp $user $key", $result);
+	$cmdResult = exec("expect /var/www/html/vpn/VPNenrollment-update.exp $user $key", $result);
 	
 	// Set mail variables
 	$headers  = 'MIME-Version: 1.0' . "\r\n";
