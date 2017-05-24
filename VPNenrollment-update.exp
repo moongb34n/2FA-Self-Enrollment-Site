@@ -3,9 +3,9 @@
 # Expect script for updating user key pairing in F5 BIG-IP VPN appliance
 #
 # Written by: jreyes@prysm.com
-# v1.0 2017-04
+# v1.1 2017-05
 #
-# 4/6/2017 - latest version
+# 5/23/2017 - latest version
 #
 
 exp_internal 0
@@ -22,11 +22,11 @@ expect {
 		send "yes\n"
 		sleep 2
 		expect "Password:"
-		send "****\n"
+		send "vpnadmin\n"
 		sleep 1		
 	}
 	"Password:" {
-		send "****\n"
+		send "vpnadmin\n"
 		sleep 1
 	}
 }
@@ -37,10 +37,20 @@ puts $chan "Connection opened to VPN appliance"
 send "modify /ltm data-group internal google_auth_keys records modify { $user { data $key } }\n"
 puts $chan "Executing command: modify /ltm data-group internal google_auth_keys records modify { $user { data $key } }"
 sleep 1
-expect "(tmos)#"
-send "quit\n"
-expect "closed"
-close
-puts $chan "User successfully updated"
+expect {
+	"was not found" {
+		send "quit\n"
+		expect "closed"
+		close
+		send_user "User doesn't exist\n"
+		puts $chan "User doesn't exist"
+	}
+	"(tmos)#" {
+		send "quit\n"
+		expect "closed"
+		close
+		puts $chan "User successfully updated"
+	}
+}
 puts $chan "Connection closed\n"
 close $chan
